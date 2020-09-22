@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block body %}
+<p>My simple web page</p>
+<h4>{{ name|lower }}</h4>
+<h4>{{ country }}</h4>
+{% for num in list %}
+{% if num <= 3 %}
+<h{{ num }}>Life is cool. Be positive</h{{ num }}>
+{% else %}
+<h{{ num }}>Life is difficult</h{{ num }}>
+{% endif %}
+{% endfor %}
+{% endblock %}
