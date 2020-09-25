@@ -2,10 +2,20 @@ from django.db import models
 
 
 # Create your models here.
-class Employee(models.Model):
-    firstName = models.CharField(max_length=200)
-    lastName = models.CharField(max_length=200)
-    emp_id = models.IntegerField()
+class QuoteCategory(models.Model):
+    title = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.firstName
+        return self.title
+
+
+class Quote(models.Model):
+    quote = models.TextField()
+    author = models.CharField(max_length=200)
+    quote_category = models.ForeignKey(QuoteCategory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        if len(self.quote) > 50:
+            return self.quote[:50] + "..."
+        return self.quote
+

@@ -1,13 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
-from rest_framework .views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from .models import Employee
-from .serializers import EmployeeSerializers
-from django.views import View
+
+
+from .models import Quote, QuoteCategory
 from django.views.generic import TemplateView
+from django.views.generic import ListView
 
 
 # Create your views here.
@@ -26,13 +21,11 @@ class AboutView(TemplateView):
     template_name = 'about.html'
 
 
-class EmployeeView(APIView):
-    def get(self, request):
-        employees = Employee.objects.all()
-        serializer = EmployeeSerializers(employees, many=True)
-        return Response(serializer.data)
+class QuotesView(ListView):
+    template_name = 'quote.html'
+    model = Quote
 
-    def post(self):
-        pass
-
+    def get_queryset(self):
+        query_set = super().get_queryset()
+        return query_set.select_related('quote_category')
 

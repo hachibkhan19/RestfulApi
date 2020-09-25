@@ -1,9 +1,14 @@
 from rest_framework import serializers
-from . models import Employee
+from webapp.models import Quote, QuoteCategory
 
 
-class EmployeeSerializers(serializers.ModelSerializer):
+class QuoteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Employee
-#        fields = {'firstName', 'lastName'}
-    fields = "__all__"
+        model = Quote
+        fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuoteCategory
+        fields = '__all__'
